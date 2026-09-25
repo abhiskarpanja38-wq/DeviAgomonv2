@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Devi Agomon</title>
+  
+  <!-- Google Fonts for Bengali Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="icon" type="image/png" href="https://media.istockphoto.com/id/2232239058/vector/happy-durga-puja-poster-template-design-with-goddess-durga-eyes-and-trishul.jpg?s=612x612&w=0&k=20&c=Up995Lz_znDLWBIaW9N1m2b72-Uigzua2IbM0Rh082w=">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@300;400;600;700;800&family=Galada&family=Hind+Siliguri:wght@400;500;600;700&family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+   
+/* =================================
+   DURGA LOADING SCREEN
+================================= */
+
+#durga-loader {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    z-index: 999999;
+
+    background-image: url("ChatGPT Image Sep 25, 2026, 04_30_31 PM.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    overflow: hidden;
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
+}
+
+
+/* Dark cinematic overlay */
+
+.loader-overlay {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0,0,0,0.05),
+            rgba(0,0,0,0.20),
+            rgba(0,0,0,0.65)
+        );
+}
+
+
+/* Loading content */
+
+.loader-content {
+    width: min(90%, 600px);
+
+    text-align: center;
+
+    margin-bottom: 7vh;
+
+    animation: loaderContentIn 1.5s ease;
+}
+
+
+/* Title */
+
+.loader-content h1 {
+    margin: 0 0 8px;
+
+    font-family: serif;
+
+    font-size: clamp(32px, 6vw, 58px);
+
+    color: #ffd36a;
+
+    text-shadow:
+        0 0 10px rgba(255,180,40,.8),
+        0 0 30px rgba(255,100,20,.7);
+}
+
+
+/* Message */
+
+#loader-message {
+    margin: 0 0 20px;
+
+    color: #fff1c7;
+
+    font-size: clamp(17px, 3vw, 23px);
+
+    text-shadow:
+        0 2px 8px #000;
+}
+
+
+/* Progress */
+
+.loader-progress {
+    width: min(80vw, 460px);
+
+    height: 10px;
+
+    margin: auto;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    background: rgba(0,0,0,.55);
+
+    border: 1px solid rgba(255,210,100,.7);
+
+    box-shadow:
+        0 0 15px rgba(255,160,20,.5);
+}
+
+
+#loader-progress-bar {
+    width: 0%;
+
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff8c00,
+            #ffd166,
+            #fff0a6
+        );
+
+    box-shadow:
+        0 0 15px #ffb300;
+
+    transition: width .15s ease;
+}
+
+
+#loader-percent {
+    margin-top: 8px;
+
+    color: #ffd36a;
+
+    font-weight: bold;
+
+    font-size: 15px;
+
+    text-shadow:
+        0 2px 6px #000;
+}
+
+
+/* Fade out */
+
+#durga-loader.loader-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+
+/* Entrance animation */
+
+@keyframes loaderContentIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    #durga-loader {
+        background-position: center center;
+    }
+
+    .loader-content {
+        margin-bottom: 5vh;
+    }
+
+}
+  </style>
+</head>
+<body>
+ <!-- DURGA LOADING SCREEN -->
+<div id="durga-loader">
+
+    <div class="loader-overlay">
+
+        <div class="loader-content">
+
+            <h1>শুভ দেবীপক্ষ</h1>
+
+            <p id="loader-message">মা আসছেন...</p>
+
+            <div class="loader-progress">
+                <div id="loader-progress-bar"></div>
+            </div>
+
+            <div id="loader-percent">0%</div>
+
+        </div>
+
+    </div>
+
+</div>
+  <!-- Floating Falling Kash Flowers Canvas -->
+  <canvas id="kashCanvas"></canvas>
+
+  <!-- Traditional Garland Top Border -->
+  <div class="top-garland-border"></div>
+
+  <header>
+    <div class="nav-container">
+      <a href="#home" class="brand-logo">
+        <div class="brand-symbol" aria-hidden="true">
+          <!-- Maa Durga Trishul/Icon SVG -->
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2L14 7H10L12 2ZM11 8H13V15H11V8ZM8 5C7 8 5 9 3 9C5 11 7 13 8 16L9.5 15C8.5 12.5 7 11 5.5 10C7 9.5 8 8 8.8 6.5L8 5ZM16 5C17 8 19 9 21 9C19 11 17 13 16 16L14.5 15C15.5 12.5 17 11 18.5 10C17 9.5 16 8 15.2 6.5L16 5ZM11 16H13V22H11V16Z" />
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">শুভ দেবীপক্ষ</span>
+          <span class="brand-subtitle">Durga Puja 2026</span>
+        </div>
+      </a>
+
+      <!-- Mobile Hamburger Button -->
+      <button class="menu-toggle" id="menuToggle" aria-label="মেনু খুলুন">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- Nav Links with Smooth Scrolling -->
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#songs" class="nav-link">Agomoni Songs</a></li>
+        <li><a href="#dhak" class="nav-link">Dhak</a></li>
+        <li><a href="#schedule" class="nav-link">Puja Schedule</a></li>
+        <li><a href="#countdown" class="nav-link">Countdown</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="hero-section">
+      <!-- Rotating Decorative Alpona SVG in background -->
+      <svg class="alpona-bg" viewBox="0 0 200 200">
+        <circle cx="100" cy="100" r="92" fill="none" stroke="#8B0000" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <circle cx="100" cy="100" r="78" fill="none" stroke="#D4AF37" stroke-width="2"/>
+        <circle cx="100" cy="100" r="62" fill="none" stroke="#8B0000" stroke-width="1"/>
+        <circle cx="100" cy="100" r="45" fill="none" stroke="#B22222" stroke-width="1.5" stroke-dasharray="2,4"/>
+        <g stroke="#8B0000" stroke-width="1.2" fill="none">
+          <path d="M100 8 C115 35, 115 65, 100 92 C85 65, 85 35, 100 8 Z" />
+          <path d="M100 192 C115 165, 115 135, 100 108 C85 135, 85 165, 100 192 Z" />
+          <path d="M8 100 C35 115, 65 115, 92 100 C65 85, 35 85, 8 100 Z" />
+          <path d="M192 100 C165 115, 135 115, 108 100 C135 85, 165 85, 192 100 Z" />
+          <path d="M35 35 C60 50, 75 75, 75 75 C60 90, 35 105, 35 35" />
+          <path d="M165 165 C140 150, 125 125, 125 125 C140 110, 165 95, 165 165" />
+          <path d="M165 35 C140 60, 125 75, 125 75 C140 90, 165 105, 165 35" />
+          <path d="M35 165 C60 140, 75 125, 75 125 C60 110, 35 95, 35 165" />
+        </g>
+      </svg>
+      
+
+      <div class="hero-content">
+        <!-- Traditional Maa Durga Eyes SVG Motif -->
+        <div class="durga-eyes-wrapper">
+          <svg width="180" height="70" viewBox="0 0 180 70" fill="none">
+            <!-- Left Eye -->
+            <path d="M18 35 C38 18, 62 18, 80 35 C62 50, 38 50, 18 35 Z" fill="#FFFFFF" stroke="#8B0000" stroke-width="2.5"/>
+            <circle cx="50" cy="34" r="8.5" fill="#3E000C"/>
+            <circle cx="52" cy="32" r="2.8" fill="#FFFFFF"/>
+            <path d="M15 36 C35 12, 65 12, 85 33" stroke="#8B0000" stroke-width="3" stroke-linecap="round"/>
+            
+            <!-- Right Eye -->
+            <path d="M100 35 C118 18, 142 18, 162 35 C142 50, 118 50, 100 35 Z" fill="#FFFFFF" stroke="#8B0000" stroke-width="2.5"/>
+            <circle cx="130" cy="34" r="8.5" fill="#3E000C"/>
+            <circle cx="132" cy="32" r="2.8" fill="#FFFFFF"/>
+            <path d="M97 33 C117 12, 147 12, 167 36" stroke="#8B0000" stroke-width="3" stroke-linecap="round"/>
+
+            <!-- Third Eye (Trinayan) & Sindoor Bindi -->
+            <path d="M90 10 C96 20, 96 28, 90 38 C84 28, 84 20, 90 10 Z" fill="#D2143A" stroke="#D4AF37" stroke-width="1.5"/>
+            <circle cx="90" cy="24" r="3" fill="#FFE2B8"/>
+          </svg>
+        </div>
+
+        <span class="devipaksha-badge">✨ আগমনীর শুভ বার্তা ✨</span>
+        <h1 class="hero-main-title">শুভ দেবীপক্ষ</h1>
+        <p class="hero-tagline">মা আসছেন — শুভ মহালয়া ও দুর্গাপূজার শুভেচ্ছা</p>
+        <p class="hero-english-sub">Welcome to Devipaksha – The Spirit of Durga Puja</p>
+
+        <div class="hero-poetry-quote">
+          "কাশফুলের দোলা, ঢাকের বাদ্য আর শিউলির গন্ধে আবারও আসছে মায়ের আগমনী। আলোকময় শরৎকালে ধরণী সেজে উঠছে দেবীবরণের উল্লাসে।"
+        </div>
+         <video controls autoplay muted loop width="800">
+    <source src="Create_a_cinematic_second_p.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+    
+
+        <div class="hero-cta-group">
+          <a href="#songs" class="btn-primary">
+            <span>🎵 শুনুন আগমনী</span>
+          </a>
+          <a href="#countdown" class="btn-secondary">
+            <span>🕰️ কাউন্টডাউন দেখুন</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+   <!-- =========================================
+     DURGA PUJA COUNTDOWN
+========================================= -->
+
+<section id="countdown">
+
+    <div class="countdown-section">
+
+        <!-- TOP HEADING -->
+        <!-- <div class="countdown-container">
+
+            <span class="section-pretitle">
+                অপেক্ষার অবসান
+            </span>
+
+            <div class="countdown-headline">
+                <span>🌸</span>
+
+                <span id="countdownHeadlineText">
+                    মা আসতে আর মাত্র...
+                </span>
+
+                <span>🌸</span>
+            </div>
+
+        </div> -->
+
+
+        <!-- MAIN COUNTDOWN BOX -->
+        <div class="countdown-wrapper">
+
+            <!-- LEFT: DURGA ART -->
+            <div class="countdown-art">
+
+                <img
+                    src="311a5402f30d454b1e1df9657cdfdfac-removebg-preview.png"
+                    alt="Durga"
+                >
+
+            </div>
+
+
+            <!-- CENTER: COUNTDOWN -->
+            <div class="countdown-main">
+
+                <h2>
+                    DURGA PUJA 2026
+                </h2>
+
+
+                <!-- DECORATIVE LINE -->
+                <div class="ornament">
+
+                    <span></span>
+
+                    <b>❖</b>
+
+                    <span></span>
+
+                </div>
+
+
+                <!-- TIMER -->
+                <div class="countdown-grid">
+
+                    <!-- DAYS -->
+                    <div class="timer-card">
+
+                        <span
+                            class="timer-digits"
+                            id="days"
+                        >
+                            00
+                        </span>
+
+                        <span class="timer-label">
+                            দিন (Days)
+                        </span>
+
+                    </div>
+
+
+                    <!-- HOURS -->
+                    <div class="timer-card">
+
+                        <span
+                            class="timer-digits"
+                            id="hours"
+                        >
+                            00
+                        </span>
+
+                        <span class="timer-label">
+                            ঘণ্টা (Hours)
+                        </span>
+
+                    </div>
+
+
+                    <!-- MINUTES -->
+                    <div class="timer-card">
+
+                        <span
+                            class="timer-digits"
+                            id="minutes"
+                        >
+                            00
+                        </span>
+
+                        <span class="timer-label">
+                            মিনিট (Minutes)
+                        </span>
+
+                    </div>
+
+
+                    <!-- SECONDS -->
+                    <div class="timer-card">
+
+                        <span
+                            class="timer-digits"
+                            id="seconds"
+                        >
+                            00
+                        </span>
+
+                        <span class="timer-label">
+                            সেকেন্ড (Seconds)
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT: QUOTE -->
+            <div class="countdown-quote">
+
+                <div class="quote-flower">
+                    ❧
+                </div>
+
+                <p>
+                    “শরৎ এসেছে,<br>
+                    মায়ের আগমনী বার্তা<br>
+                    নিয়ে...”
+                </p>
+
+                <div class="quote-flower">
+                    ❖
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+    <section id="songs">
+      <div class="section-header">
+        <span class="section-pretitle">শরতের ভোরের সুর</span>
+        <h2 class="section-title">🎵 আগমনী গান</h2>
+        <div class="section-alpona-line"></div>
+        <p class="section-desc">
+          মহালয়ার ভোর থেকে দুর্গাপূজার সূচনা পর্যন্ত বাংলার প্রতিটি ঘরে ধ্বনিত হয় এই অমর গান ও স্তোত্রমালা।
+        </p>
+      </div>
+
+      <div class="songs-grid">
+        <!-- Song Card 1 -->
+        <article class="song-card">
+          <span class="song-badge">অমর মহালয়া</span>
+          <div class="song-meta">
+            <h3 class="song-title">বাজলো তোমার আলোর বেণু</h3>
+            <p class="song-artist">🎙️ জয়তী চক্রবর্তী </p>
+            <p class="song-desc">শরতের মেঘমুক্ত নীলাকাশে মহালয়ার আগমনী সুর ও আলোকময় প্রভাত বন্দনা।</p>
+          </div>
+          <div class="audio-player-wrapper">
+            <!-- Audio element. Users can drop audio files in an audio/ directory or use this synth player -->
+            <audio controls class="agomoni-audio" id="audio1" preload="none" data-song-id="1">
+              <source src="audio/baglo_tomer_alor.mp3" type="audio/mpeg">
+              আপনার ব্রাউজারে অডিও প্লেয়ার সমর্থিত নয়।
+            </audio>
+            <div class="custom-audio-controls">
+              <button type="button" class="audio-action-btn play-btn" onclick="handleSongControl(1, 'play')">▶ চালান</button>
+              <button type="button" class="audio-action-btn pause-btn" onclick="handleSongControl(1, 'pause')">⏸ থামান</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Song Card 2 -->
+        <article class="song-card">
+          <span class="song-badge">মহিষাসুরমর্দিনী</span>
+          <div class="song-meta">
+            <h3 class="song-title">জাগো দুর্গা</h3>
+            <p class="song-artist">🎙️দিব্যা রায়/ সমবেত কণ্ঠ</p>
+            <p class="song-desc">নিদ্রোত্থিত ধরণীতে মহামায়ার জাগ্রত রূপ ও শক্তির আবাহন সঙ্গীত।</p>
+          </div>
+          <div class="audio-player-wrapper">
+            <audio controls class="agomoni-audio" id="audio2" preload="none" data-song-id="2">
+              <source src="audio/jago tumi jago.mp3" type="audio/mpeg">
+              আপনার ব্রাউজারে অডিও প্লেয়ার সমর্থিত নয়।
+            </audio>
+            <div class="custom-audio-controls">
+              <button type="button" class="audio-action-btn play-btn" onclick="handleSongControl(2, 'play')">▶ চালান</button>
+              <button type="button" class="audio-action-btn pause-btn" onclick="handleSongControl(2, 'pause')">⏸ থামান</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Song Card 3 -->
+        <article class="song-card">
+          <span class="song-badge">ভক্তিগীতি</span>
+          <div class="song-meta">
+            <h3 class="song-title">মা গো চিন্ময়ী রূপ ধরে</h3>
+            <p class="song-artist">🎙️ শোভন গাঙ্গুলী</p>
+            <p class="song-desc">মাটির প্রতিমায় চিন্ময়ী দেবীর জীবন্ত উপস্থিতি ও ভক্তের ব্যাকুল প্রার্থনা।</p>
+          </div>
+          <div class="audio-player-wrapper">
+            <audio controls class="agomoni-audio" id="audio3" preload="none" data-song-id="3">
+              <source src="audio/Chinmoyee Rup Dhore (চিন্ময়ী রূপ ধরে)  Shovan  Kazi Nazrul Islam  Maa Durga  Aalo (2).mp3" type="audio/mpeg">
+              আপনার ব্রাউজারে অডিও প্লেয়ার সমর্থিত নয়।
+            </audio>
+            <div class="custom-audio-controls">
+              <button type="button" class="audio-action-btn play-btn" onclick="handleSongControl(3, 'play')">▶ চালান</button>
+              <button type="button" class="audio-action-btn pause-btn" onclick="handleSongControl(3, 'pause')">⏸ থামান</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Song Card 4 -->
+        <article class="song-card">
+          <span class="song-badge">আবাহন</span>
+          <div class="song-meta">
+            <h3 class="song-title">এসো মা দুর্গা</h3>
+            <p class="song-artist">🎙️ সনাতন ঐতিহ্যবাহী গান</p>
+            <p class="song-desc">হিমালয় থেকে কন্যা উমার মর্ত্যে পিত্রালয়ে আগমনের আবেগঘন মিষ্টি আবাহনী।</p>
+          </div>
+          <div class="audio-player-wrapper">
+            <audio controls class="agomoni-audio" id="audio4" preload="none" data-song-id="4">
+              <source src="audio/Esho Maa Durga.mp3" type="audio/mpeg">
+              আপনার ব্রাউজারে অডিও প্লেয়ার সমর্থিত নয়।
+            </audio>
+            <div class="custom-audio-controls">
+              <button type="button" class="audio-action-btn play-btn" onclick="handleSongControl(4, 'play')">▶ চালান</button>
+              <button type="button" class="audio-action-btn pause-btn" onclick="handleSongControl(4, 'pause')">⏸ থামান</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Song Card 5 -->
+        <article class="song-card">
+          <span class="song-badge">স্তোত্রপাঠ</span>
+          <div class="song-meta">
+            <h3 class="song-title">মহিষাসুরমর্দিনী চণ্ডীপাঠ</h3>
+            <p class="song-artist">🎙️ বীরেন্দ্রকৃষ্ণ ভদ্র</p>
+            <p class="song-desc">বীরেন্দ্রকৃষ্ণ ভদ্রের উদাত্ত কণ্ঠের চণ্ডীস্তোত্র যা ছাড়া বাঙালির মহালয়া অসম্পূর্ণ।</p>
+          </div>
+          <div class="audio-player-wrapper">
+            <audio controls class="agomoni-audio" id="audio5" preload="none" data-song-id="5">
+              <source src="audio/full_chandipath.mp3" type="audio/mpeg">
+              আপনার ব্রাউজারে অডিও প্লেয়ার সমর্থিত নয়।
+            </audio>
+            <div class="custom-audio-controls">
+              <button type="button" class="audio-action-btn play-btn" onclick="handleSongControl(5, 'play')">▶ চালান</button>
+              <button type="button" class="audio-action-btn pause-btn" onclick="handleSongControl(5, 'pause')">⏸ থামান</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Song Card 6 -->
+        <article class="song-card">
+          <span class="song-badge">লোকায়ত সুর</span>
+          <div class="song-meta">
+            <h3 class="song-title">দুগ্গা এলো</h3>
+            <p class="song-artist">🎙️ মা আসছেন — শরতের শুভ আগমনী</p>
+            <p class="song-desc">শরতের কাশবন ও ঢাকের রোমাঞ্চকর ছন্দে বাংলার সার্বজনীন উৎসবের উন্মাদনা।</p>
+          </div>
+          <div class="audio-player-wrapper">
+            <audio controls class="agomoni-audio" id="audio6" preload="none" data-song-id="6">
+              <source src="audio/Dugga Elo - Official Video  Monali Thakur  Guddu  Indranil Das.mp3" type="audio/mpeg">
+              আপনার ব্রাউজারে অডিও প্লেয়ার সমর্থিত নয়।
+            </audio>
+            <div class="custom-audio-controls">
+              <button type="button" class="audio-action-btn play-btn" onclick="handleSongControl(6, 'play')">▶ চালান</button>
+              <button type="button" class="audio-action-btn pause-btn" onclick="handleSongControl(6, 'pause')">⏸ থামান</button>
+            </div>
+          </div>
+        </article>
+      </div>
+
+     
+    </section>
+
+    <section id="dhak">
+      <div class="dhak-section">
+        <div class="dhak-container">
+          <span class="section-pretitle">উৎসবের ছন্দ</span>
+          <h2 class="section-title">🥁 ঢাকের বাদ্য ও কাঁসর ঘণ্টা</h2>
+          <div class="section-alpona-line"></div>
+          <p class="section-desc">
+            ঢাকের কাঠি ছাড়া পুজো ভাবাই যায় না! নিচের ঢাক বা বোলে ক্লিক করে অনুভব করুন পূজামণ্ডপের ঢাকের প্রকৃত আবহ।
+          </p>
+
+          <div class="dhak-instrument-box">
+            <!-- Dhak Drum Circle Trigger -->
+            <div class="dhak-visual" id="dhakTrigger" title="ঢাকে বাড়ি দিন!">
+              <div class="dhak-feather-accent">🪶</div>
+            </div>
+            <p class="dhak-status" id="dhakStatusText">
+    ঢাকে বাড়ি দিতে ক্লিক করুন অথবা বোল নির্বাচন করুন!
+</p>
+
+<div class="bol-buttons-grid">
+
+    <button type="button" class="bol-btn" onclick="playRealDhak('dha-kuting')">
+        🥁 ধা-কুড়-কুড় ধা
+    </button>
+
+    <button type="button" class="bol-btn" onclick="playRealDhak('arati')">
+        🔥 আরতি বোল (ধুনুচি)
+    </button>
+
+    <button type="button" class="bol-btn" onclick="playRealDhak('kashor')">
+        🔔 কাঁসর ঘণ্টা ধ্বনি
+    </button>
+
+    <button type="button" class="bol-btn" onclick="playRealDhak('bhashan')">
+        💃 বিসর্জন ও বিদায় বোল
+    </button>
+
+    <button type="button"
+            class="bol-btn"
+            style="background: #FFE8E8;"
+            onclick="stopRealDhak()">
+        ⏹️ থামান
+    </button>
+
+</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="schedule">
+      <div class="section-header">
+        <span class="section-pretitle">পূজাদিনের দিনপঞ্জিকা</span>
+        <h2 class="section-title">🗓️ দুর্গাপূজার নির্ঘণ্ট ও তিথি</h2>
+        <div class="section-alpona-line"></div>
+        <p class="section-desc">
+          দেবীপক্ষের সূচনা থেকে শুভ বিজয়ার সিঁদুরখেলা—প্রতিটি তিথির পবিত্র আচার ও সময়সূচী।
+        </p>
+      </div>
+
+      <div class="schedule-grid">
+        <!-- Sasthi -->
+        <article class="schedule-card">
+          <span class="card-tithi-badge">ষষ্ঠী তারিখ:-16/10/2026</span>
+          <h3 class="tithi-name">মহাষষ্ঠী</h3>
+          <p class="tithi-date">📅 বোধন ও আমন্ত্রণ</p>
+          <p>বিল্ববৃক্ষমূলে দেবীর বোধন, অধিবাস এবং প্রাণপ্রতিষ্ঠা। মণ্ডপে মণ্ডপে দেবীর মুখ উন্মোচন হয়।</p>
+          <ul class="ritual-list">
+            <li class="ritual-item"><span class="bullet">✦</span> কল্পারম্ভ ও অধিবাস</li>
+            <li class="ritual-item"><span class="bullet">✦</span> বিল্বশাখায় দেবীবরণ</li>
+            <li class="ritual-item"><span class="bullet">✦</span> ঢাকের প্রথম কাঠি</li>
+          </ul>
+        </article>
+
+        <!-- Saptami -->
+        <article class="schedule-card">
+          <span class="card-tithi-badge">সপ্তমী তারিখ:-17/10/2026</span>
+          <h3 class="tithi-name">মহাসপ্তমী</h3>
+          <p class="tithi-date">📅 নবপত্রিকা প্রবেশ</p>
+          <p>ভোরবেলা গঙ্গায় বা পবিত্র জলাশয়ে 'কলাবউ' স্নান করিয়ে দেবীর পাশে স্থাপন করা হয়।</p>
+          <ul class="ritual-list">
+            <li class="ritual-item"><span class="bullet">✦</span> নবপত্রিকা স্নান ও প্রবেশ</li>
+            <li class="ritual-item"><span class="bullet">✦</span> মহাসপ্তমী বিহিত পূজা</li>
+            <li class="ritual-item"><span class="bullet">✦</span> পুষ্পাঞ্জলি ও ভোগ নিবেদন</li>
+          </ul>
+        </article>
+
+        <!-- Ashtami -->
+        <article class="schedule-card" style="border-top-color: var(--sindoor-orange);">
+          <span class="card-tithi-badge" style="background:#FFE6D8; color:var(--primary-red);">মহাষ্টমী তারিখ:-18/10/2026 ও সন্ধিপূজা তারিখ:-19/10/2026 সময়:-10:27 AM থেকে 11:15</span>
+          <h3 class="tithi-name">মহাষ্টমী</h3>
+          <p class="tithi-date">📅 অঞ্জলি ও কুমারী পূজা</p>
+          <p>অষ্টমী ও নবমীর মিলনক্ষণে ১০৮ পদ্ম ও ১০৮ প্রদীপের পবিত্র আলোয় অনুষ্ঠিত হয় মহিমান্বিত সন্ধিপূজা।</p>
+          <ul class="ritual-list">
+            <li class="ritual-item"><span class="bullet">✦</span> সকালের পবিত্র পুষ্পাঞ্জলি</li>
+            <li class="ritual-item"><span class="bullet">✦</span> সপ্রাণ কুমারী পূজা</li>
+            <li class="ritual-item"><span class="bullet">✦</span> ১০৮ প্রদীপের সন্ধিপূজা</li>
+          </ul>
+        </article>
+
+        <!-- Nabami -->
+        <article class="schedule-card">
+          <span class="card-tithi-badge">নবমী তারিখ:-19/10/2026 </span>
+          <h3 class="tithi-name">মহানবমী</h3>
+          <p class="tithi-date">📅 হোমযজ্ঞ ও ধুনুচি নাচ</p>
+          <p>মহামায়ার পূজা সমাপনী আচার, শান্তিবারি বিতরণ এবং সন্ধ্যায় মণ্ডপে মণ্ডপে ঢাকের তালে ধুনুচি নৃত্য।</p>
+          <ul class="ritual-list">
+            <li class="ritual-item"><span class="bullet">✦</span> নবমী বিহিত হোমযজ্ঞ</li>
+            <li class="ritual-item"><span class="bullet">✦</span> মহা আরতি ও শান্তিবারি</li>
+            <li class="ritual-item"><span class="bullet">✦</span> উন্মাতাল ধুনুচি আরতি</li>
+          </ul>
+        </article>
+
+        <!-- Dashami -->
+        <article class="schedule-card">
+          <span class="card-tithi-badge">বিজয়া তারিখ:-20/10/2026</span>
+          <h3 class="tithi-name">শুভ বিজয়া দশমী</h3>
+          <p class="tithi-date">📅 অপরাজিতা পূজা ও বিসর্জন</p>
+          <p>মায়ের কৈলাসে প্রত্যাবর্তন। সধবাদের মিষ্টিমুখ, লাল পাড় শাড়িতে সিঁদুরখেলা এবং শুভ বিজয়ার কোলাকুলি।</p>
+          <ul class="ritual-list">
+            <li class="ritual-item"><span class="bullet">✦</span> দর্পণ বিসর্জন ও দেবীবরণ</li>
+            <li class="ritual-item"><span class="bullet">✦</span> ঐতিহ্যবাহী সিঁদুরখেলা</li>
+            <li class="ritual-item"><span class="bullet">✦</span> গঙ্গায় বিসর্জন ও প্রণাম</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="section-header">
+        <span class="section-pretitle">আমাদের সংস্কৃতি ও ঐতিহ্য</span>
+        <h2 class="section-title">🌺 দেবীপক্ষ ও শারদীয়া উৎসব</h2>
+        <div class="section-alpona-line"></div>
+      </div>
+
+      <div class="about-card-wrapper">
+        <div class="about-visual">
+          <!-- Maa Durga Idol Emblem -->
+          <svg viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="54" fill="#8B0000" stroke="#FFDB70" stroke-width="3"/>
+            <!-- Crown / Mukut -->
+            <path d="M40 42 L60 18 L80 42 L70 38 L60 28 L50 38 Z" fill="#FFD700" stroke="#B8860B" stroke-width="1"/>
+            <!-- Face -->
+            <path d="M45 42 Q60 38 75 42 Q78 68 60 82 Q42 68 45 42 Z" fill="#FFE8C2"/>
+            <!-- Eyes -->
+            <path d="M48 54 Q54 50 60 55" stroke="#3E000C" stroke-width="2" fill="none"/>
+            <path d="M60 55 Q66 50 72 54" stroke="#3E000C" stroke-width="2" fill="none"/>
+            <!-- Third eye -->
+            <path d="M60 44 Q62 48 60 51 Q58 48 60 44 Z" fill="#D2143A"/>
+            <!-- Nose ring (Noth) -->
+            <circle cx="56" cy="64" r="5" fill="none" stroke="#D4AF37" stroke-width="1.2"/>
+            <!-- Smiling Lips -->
+            <path d="M55 70 Q60 74 65 70" stroke="#D2143A" stroke-width="2" fill="none"/>
+          </svg>
+          <div class="about-visual-caption">
+            "যা দেবী সর্বভূতেষু শক্তিরূপেণ সংস্থিতা..."
+          </div>
+        </div>
+
+        <div class="about-text">
+          <h3>দেবীপক্ষের মাহাত্ম্য</h3>
+          <p>
+            মহালয়ার পুণ্য প্রভাতে পিতৃপক্ষের অবসানে সূচনা হয় পরম পবিত্র দেবীপক্ষের। শাস্ত্র মতে, এই বিশেষ পক্ষে স্বর্গ থেকে মর্ত্যে আগমন ঘটে জগজ্জননী মা দুর্গার। এই সময় অসুরবিনাশিনী দুর্গা রূপেই নয়, তিনি আসেন পরিবারের আদরের মেয়ে 'উমা' রূপে—তাঁর সাথে থাকেন কার্তিক, গণেশ, লক্ষ্মী ও সরস্বতী।
+          </p>
+          <p>
+            বাঙালির বারো মাসে তেরো পার্বণের মাঝে দুর্গাপূজা শুধু একটি ধর্মীয় আচার নয়; এটি জাতি-ধর্ম-বর্ণ নির্বিশেষে মহামিলনের আনন্দোৎসব। আলপনার শুভ্র রেখা, শিউলি ফুলের স্নিগ্ধ গন্ধ আর ধুনুচির ধোঁয়ায় শরতের প্রতিটি দিন মুখরিত হয়ে ওঠে।
+          </p>
+
+          <div class="about-features">
+            <div class="feature-item">
+              <span class="feature-icon">🌾</span>
+              <span class="feature-text">কাশফুল ও শিউলির সৌরভ</span>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">🪔</span>
+              <span class="feature-text">সন্ধিপূজা ও ১০৮ প্রদীপ</span>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">🥁</span>
+              <span class="feature-text">উন্মাতাল ঢাক ও ধুনুচি নাচ</span>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">🍬</span>
+              <span class="feature-text">বিজয়ার মিষ্টিমুখ ও কোলাকুলি</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <h2 class="footer-blessing">সকলকে শারদীয়ার আন্তরিক প্রীতি ও শুভেচ্ছা</h2>
+      <p class="footer-mantra">
+        "সর্বমঙ্গলমঙ্গল্যে শিবে সর্বার্থসাধিকে। শরণ্যে ত্র্যম্বকে গৌরি নারায়ণি নমোঽস্তু তে॥"
+      </p>
+
+      <div class="footer-alpona"></div>
+
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          © ২০২৬ শুভ দেবীপক্ষ | শুভ মহালয়া ও শারদোৎসব | সার্বজনীন উৎসব শ্রদ্ধাঞ্জলি
+        </div>
+        <ul class="footer-links">
+          <li><a href="#home">প্রথম পাতা</a></li>
+          <li><a href="#songs">আগমনী গান</a></li>
+          <li><a href="#dhak">ঢাক</a></li>
+          <li><a href="#countdown">কাউন্টডাউন</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to top scroll button -->
+  <button type="button" class="back-to-top" id="backToTop" aria-label="উপরে যান">↑</button>
+
+  <script src="script.js"></script>
+</body>
+</html>

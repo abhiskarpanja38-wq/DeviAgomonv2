@@ -803,6 +803,21 @@
 ========================================= */
 
 @media (max-width: 700px) {
+  .hero-poetry-quote, .hero-tagline, .btn-primary, .btn-secondary {
+    width: 350px;
+  }
+  .hero-english-sub{
+width: 300px;
+  }
+  .hero-vid{
+    width: 380px;
+    border-radius: 10px;
+  }
+
+  .about-visual img{
+    width: 120%;
+    height: 180px;
+  }
 
     #countdown {
         padding: 35px 12px;

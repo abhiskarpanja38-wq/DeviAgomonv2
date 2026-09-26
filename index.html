@@ -317,8 +317,8 @@
         <div class="hero-poetry-quote">
           "কাশফুলের দোলা, ঢাকের বাদ্য আর শিউলির গন্ধে আবারও আসছে মায়ের আগমনী। আলোকময় শরৎকালে ধরণী সেজে উঠছে দেবীবরণের উল্লাসে।"
         </div>
-         <video controls autoplay muted loop width="800">
-    <source src="Create_a_cinematic_second_p.mp4" type="video/mp4">
+         <video controls autoplay muted loop width="800" class="hero-vid">
+    <source src="Create_a_cinematic_second_p.mp4" type="video/mp4" >
     Your browser does not support the video tag.
 </video>
     
@@ -343,7 +343,7 @@
     <div class="countdown-section">
 
         <!-- TOP HEADING -->
-        <!-- <div class="countdown-container">
+        <div class="countdown-container">
 
             <span class="section-pretitle">
                 অপেক্ষার অবসান
@@ -359,7 +359,7 @@
                 <span>🌸</span>
             </div>
 
-        </div> -->
+        </div>
 
 
         <!-- MAIN COUNTDOWN BOX -->
@@ -556,13 +556,13 @@
             <p class="song-desc">মায়ের আগমনের বার্তায় আলোকিত হোক চারপাশ, জেগে উঠুক বাংলার উৎসবের আনন্দ।</p>
           </div>
           <div class="audio-player-wrapper">
-            <audio controls class="agomoni-audio" id="audio2" preload="none" data-song-id="2">
-              <source src="audio/audio\ওগো আমার ও আগমনী Slowed + Revarb  Ogo Amaro Agomoni #durgapuja.mp3" type="audio/mpeg">
+            <audio controls class="agomoni-audio" id="audio3" preload="none" data-song-id="3">
+              <source src="audio/ogo amar agomoni.mp3" type="audio/mpeg">
               আপনার ব্রাউজারে অডিও প্লেয়ার সমর্থিত নয়।
             </audio>
             <div class="custom-audio-controls">
-              <button type="button" class="audio-action-btn play-btn" onclick="handleSongControl(2, 'play')">▶ চালান</button>
-              <button type="button" class="audio-action-btn pause-btn" onclick="handleSongControl(2, 'pause')">⏸ থামান</button>
+              <button type="button" class="audio-action-btn play-btn" onclick="handleSongControl(3, 'play')">▶ চালান</button>
+              <button type="button" class="audio-action-btn pause-btn" onclick="handleSongControl(3, 'pause')">⏸ থামান</button>
             </div>
           </div>
         </article>
@@ -576,28 +576,8 @@
             <p class="song-desc">মাটির প্রতিমায় চিন্ময়ী দেবীর জীবন্ত উপস্থিতি ও ভক্তের ব্যাকুল প্রার্থনা।</p>
           </div>
           <div class="audio-player-wrapper">
-            <audio controls class="agomoni-audio" id="audio3" preload="none" data-song-id="3">
-              <source src="audio/Chinmoyee Rup Dhore (চিন্ময়ী রূপ ধরে)  Shovan  Kazi Nazrul Islam  Maa Durga  Aalo (2).mp3" type="audio/mpeg">
-              আপনার ব্রাউজারে অডিও প্লেয়ার সমর্থিত নয়।
-            </audio>
-            <div class="custom-audio-controls">
-              <button type="button" class="audio-action-btn play-btn" onclick="handleSongControl(3, 'play')">▶ চালান</button>
-              <button type="button" class="audio-action-btn pause-btn" onclick="handleSongControl(3, 'pause')">⏸ থামান</button>
-            </div>
-          </div>
-        </article>
-
-        <!-- Song Card 4 -->
-        <article class="song-card">
-          <span class="song-badge">আবাহন</span>
-          <div class="song-meta">
-            <h3 class="song-title">এসো মা দুর্গা</h3>
-            <p class="song-artist">🎙️ সনাতন ঐতিহ্যবাহী গান</p>
-            <p class="song-desc">হিমালয় থেকে কন্যা উমার মর্ত্যে পিত্রালয়ে আগমনের আবেগঘন মিষ্টি আবাহনী।</p>
-          </div>
-          <div class="audio-player-wrapper">
             <audio controls class="agomoni-audio" id="audio4" preload="none" data-song-id="4">
-              <source src="audio/Esho Maa Durga.mp3" type="audio/mpeg">
+              <source src="audio/Chinmoyee Rup Dhore (চিন্ময়ী রূপ ধরে)  Shovan  Kazi Nazrul Islam  Maa Durga  Aalo (2).mp3" type="audio/mpeg">
               আপনার ব্রাউজারে অডিও প্লেয়ার সমর্থিত নয়।
             </audio>
             <div class="custom-audio-controls">
@@ -609,15 +589,15 @@
 
         <!-- Song Card 5 -->
         <article class="song-card">
-          <span class="song-badge">স্তোত্রপাঠ</span>
+          <span class="song-badge">আবাহন</span>
           <div class="song-meta">
-            <h3 class="song-title">মহিষাসুরমর্দিনী চণ্ডীপাঠ</h3>
-            <p class="song-artist">🎙️ বীরেন্দ্রকৃষ্ণ ভদ্র</p>
-            <p class="song-desc">বীরেন্দ্রকৃষ্ণ ভদ্রের উদাত্ত কণ্ঠের চণ্ডীস্তোত্র যা ছাড়া বাঙালির মহালয়া অসম্পূর্ণ।</p>
+            <h3 class="song-title">এসো মা দুর্গা</h3>
+            <p class="song-artist">🎙️ সনাতন ঐতিহ্যবাহী গান</p>
+            <p class="song-desc">হিমালয় থেকে কন্যা উমার মর্ত্যে পিত্রালয়ে আগমনের আবেগঘন মিষ্টি আবাহনী।</p>
           </div>
           <div class="audio-player-wrapper">
             <audio controls class="agomoni-audio" id="audio5" preload="none" data-song-id="5">
-              <source src="audio/mahalaya.mp3" type="audio/mpeg">
+              <source src="audio/Esho Maa Durga.mp3" type="audio/mpeg">
               আপনার ব্রাউজারে অডিও প্লেয়ার সমর্থিত নয়।
             </audio>
             <div class="custom-audio-controls">
@@ -629,6 +609,26 @@
 
         <!-- Song Card 6 -->
         <article class="song-card">
+          <span class="song-badge">স্তোত্রপাঠ</span>
+          <div class="song-meta">
+            <h3 class="song-title">মহিষাসুরমর্দিনী চণ্ডীপাঠ</h3>
+            <p class="song-artist">🎙️ বীরেন্দ্রকৃষ্ণ ভদ্র</p>
+            <p class="song-desc">বীরেন্দ্রকৃষ্ণ ভদ্রের উদাত্ত কণ্ঠের চণ্ডীস্তোত্র যা ছাড়া বাঙালির মহালয়া অসম্পূর্ণ।</p>
+          </div>
+          <div class="audio-player-wrapper">
+            <audio controls class="agomoni-audio" id="audio6" preload="none" data-song-id="6">
+              <source src="audio/mahalaya.mp3" type="audio/mpeg">
+              আপনার ব্রাউজারে অডিও প্লেয়ার সমর্থিত নয়।
+            </audio>
+            <div class="custom-audio-controls">
+              <button type="button" class="audio-action-btn play-btn" onclick="handleSongControl(6, 'play')">▶ চালান</button>
+              <button type="button" class="audio-action-btn pause-btn" onclick="handleSongControl(6, 'pause')">⏸ থামান</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Song Card 7 -->
+        <article class="song-card">
           <span class="song-badge">লোকায়ত সুর</span>
           <div class="song-meta">
             <h3 class="song-title">দুগ্গা এলো</h3>
@@ -636,13 +636,52 @@
             <p class="song-desc">শরতের কাশবন ও ঢাকের রোমাঞ্চকর ছন্দে বাংলার সার্বজনীন উৎসবের উন্মাদনা।</p>
           </div>
           <div class="audio-player-wrapper">
-            <audio controls class="agomoni-audio" id="audio6" preload="none" data-song-id="6">
+            <audio controls class="agomoni-audio" id="audio7" preload="none" data-song-id="7">
               <source src="audio/Dugga Elo - Official Video  Monali Thakur  Guddu  Indranil Das.mp3" type="audio/mpeg">
               আপনার ব্রাউজারে অডিও প্লেয়ার সমর্থিত নয়।
             </audio>
             <div class="custom-audio-controls">
-              <button type="button" class="audio-action-btn play-btn" onclick="handleSongControl(6, 'play')">▶ চালান</button>
-              <button type="button" class="audio-action-btn pause-btn" onclick="handleSongControl(6, 'pause')">⏸ থামান</button>
+              <button type="button" class="audio-action-btn play-btn" onclick="handleSongControl(7, 'play')">▶ চালান</button>
+              <button type="button" class="audio-action-btn pause-btn" onclick="handleSongControl(7, 'pause')">⏸ থামান</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Song Card 8 -->
+        <article class="song-card">
+          <span class="song-badge">লোকায়ত সুর</span>
+          <div class="song-meta">
+            <h3 class="song-title"> শিশিরে শিশিরে শারদ আকাশে</h3>
+            <p class="song-artist">🎙️ শুভমিতা বন্দ্যোপাধ্যায় </p>
+            <p class="song-desc">শিশিরভেজা ভোর, শিউলির মিষ্টি গন্ধ আর নীল আকাশে শরতের সোনালি আবেশ—মায়ের আগমনী বার্তায় জেগে ওঠে বাংলার প্রকৃতি ও হৃদয়।।</p>
+          </div>
+          <div class="audio-player-wrapper">
+            <audio controls class="agomoni-audio" id="audio8" preload="none" data-song-id="8">
+              <source src="audio/Shishire Shishire Sharodo Akashe.mp3" type="audio/mpeg">
+              আপনার ব্রাউজারে অডিও প্লেয়ার সমর্থিত নয়।
+            </audio>
+            <div class="custom-audio-controls">
+              <button type="button" class="audio-action-btn play-btn" onclick="handleSongControl(8, 'play')">▶ চালান</button>
+              <button type="button" class="audio-action-btn pause-btn" onclick="handleSongControl(8, 'pause')">⏸ থামান</button>
+            </div>
+          </div>
+        </article> 
+
+        <!-- Song Card 8 -->
+        <article class="song-card">
+          <span class="song-badge">স্তোত্রপাঠ</span>
+          <div class="song-meta">
+            <h3 class="song-title"> ওঁ জয়তাং দেবী চামুণ্ডে</h3>
+            <p class="song-artist">🎙️ শুভ আগমনী</p>
+            <p class="song-desc">দেবী চামুণ্ডার শক্তি, সাহস ও বিজয়ের বন্দনায় নিবেদিত এক ভক্তিময় স্তোত্র—মায়ের ঐশ্বরিক শক্তির আবাহনে মুখরিত হোক হৃদয়।</div>
+          <div class="audio-player-wrapper">
+            <audio controls class="agomoni-audio" id="audio9" preload="none" data-song-id="9">
+              <source src="audio/Om Jayatang Devi Chamunde.mp3" type="audio/mpeg">
+              আপনার ব্রাউজারে অডিও প্লেয়ার সমর্থিত নয়।
+            </audio>
+            <div class="custom-audio-controls">
+              <button type="button" class="audio-action-btn play-btn" onclick="handleSongControl(9, 'play')">▶ চালান</button>
+              <button type="button" class="audio-action-btn pause-btn" onclick="handleSongControl(9, 'pause')">⏸ থামান</button>
             </div>
           </div>
         </article>
@@ -789,22 +828,7 @@
       <div class="about-card-wrapper">
         <div class="about-visual">
           <!-- Maa Durga Idol Emblem -->
-          <svg viewBox="0 0 120 120">
-            <circle cx="60" cy="60" r="54" fill="#8B0000" stroke="#FFDB70" stroke-width="3"/>
-            <!-- Crown / Mukut -->
-            <path d="M40 42 L60 18 L80 42 L70 38 L60 28 L50 38 Z" fill="#FFD700" stroke="#B8860B" stroke-width="1"/>
-            <!-- Face -->
-            <path d="M45 42 Q60 38 75 42 Q78 68 60 82 Q42 68 45 42 Z" fill="#FFE8C2"/>
-            <!-- Eyes -->
-            <path d="M48 54 Q54 50 60 55" stroke="#3E000C" stroke-width="2" fill="none"/>
-            <path d="M60 55 Q66 50 72 54" stroke="#3E000C" stroke-width="2" fill="none"/>
-            <!-- Third eye -->
-            <path d="M60 44 Q62 48 60 51 Q58 48 60 44 Z" fill="#D2143A"/>
-            <!-- Nose ring (Noth) -->
-            <circle cx="56" cy="64" r="5" fill="none" stroke="#D4AF37" stroke-width="1.2"/>
-            <!-- Smiling Lips -->
-            <path d="M55 70 Q60 74 65 70" stroke="#D2143A" stroke-width="2" fill="none"/>
-          </svg>
+          <img src="https://t4.ftcdn.net/jpg/21/86/98/51/360_F_2186985171_H9Iy3t6SWSYPg91vgYG93g8CJOGFFU0z.jpg" alt="" height="280px" width="100%">
           <div class="about-visual-caption">
             "যা দেবী সর্বভূতেষু শক্তিরূপেণ সংস্থিতা..."
           </div>
